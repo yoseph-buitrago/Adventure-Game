@@ -1,6 +1,6 @@
-from AG_Coordinates import tunnels
-from Player impo
-
+from Enemy import Enemy
+from Player import Player
+import random
 
 def DisplayMenu():
     print("Welcome to Unique Adventure Game Name! \n"
@@ -8,8 +8,8 @@ def DisplayMenu():
           "cave system in the Greek wilderness while \n"
           "exploring ancient ruins\n\n")
 
-    print("You have a backpack that can carry up to 10 items, a torch, \n"
-          "an unfinished map, and a strong will to find the way out\n")
+    print("You have a backpack that can carry up to 15 items, a torch, 10 \n"
+          "matches, an unfinished map, and a strong will to find the way out\n")
 
     print("You have to light your torch every 30 seconds or you can't move. \n"
           "Your map tells you there rooms in throughout the tunnle.\n\n"
@@ -42,8 +42,12 @@ def main():
     DisplayMenu()
     userAlive = True
     user = Player()
+    run = False
 
     while userAlive:
+        chance = random.randint(1, 15)
+        print(chance)
+
         direction = getMoveDirection()
         movement = getMoveAmount()
 
@@ -62,13 +66,32 @@ def main():
         print("Current coordinates:", user.userCoordinates)
 
 
+        if user.userCoordinates == [-5,0,-14]:
+            print("Congratulations, you found your way out the cave system!")
+            userAlive = False
 
-# names = ["nate", "al", "bob"]
-# names.contains("nate") = True  names.contains("yoseph") = False
+        if movement >= 1:
+            while chance == 13:
+                enemy = Enemy()
+                print("An enemy has appeared! And he hurt you fam!")
+                while user.playerHealth >= 0 and enemy.enemyHealth >= 0 and run is False:
+                    user.playerHealth -= enemy.attackDamage
+                    print("It attacked, your health is now",user.playerHealth)
+                    print("the bad dude's health is",enemy.enemyHealth)
+                    attackChoice = str(input("Do you want to Attack or Run : "))
+                    if attackChoice.lower() == "attack":
+                        enemy.enemyHealth -= user.attackDamage
+                        print("The bad dudes health is",enemy.enemyHealth)
+                    chance = random.randint(1, 15)
 
+                    if attackChoice.lower() == "run":
+                        run = True
+                        chance = random.randint(1, 15)
 
 main()
 
+
+# occurance chance = 13
 
 
 
